@@ -22,9 +22,18 @@ class App extends Component {
     const data = await api_call.json();
     this.setState({ recipes: data.recipes });
     console.log(this.state.recipes);
-    
-    
   }
+
+    componentDidMount = () => {
+      const json = localStorage.getItem("recipes");
+      const recipes = JSON.parse(json);
+      this.setState({recipes: recipes});
+    }
+    
+    componentDidUpdate = () => {
+      const recipes = JSON.stringify(this.state.recipes);
+      localStorage.setItem("recipes", recipes);
+    }
 
   render() {
     return (
@@ -33,16 +42,8 @@ class App extends Component {
           <h1 className="App-title">H-Hour Recipe Search</h1>
         </header>
         <Form getRecipe={this.getRecipe} />
-        {this.state.recipes.map((recipe) => {
-          return (
-          
-            <div>
-              <img src={recipe.image_url} alt={recipe.title}/>           
-              <p key={recipe.recipe_id}>{recipe.title}</p>
-            </div>
-
-          );
-        }) }
+        <Recipes recipes={this.state.recipes}/>
+       
       </div>
     );
   }
