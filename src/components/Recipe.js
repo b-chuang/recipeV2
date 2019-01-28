@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const API_KEY = "529ea0b36abd3519f92c15f18f2b6497";
 
@@ -18,13 +18,11 @@ class Recipe extends React.Component {
         console.log(this.state.activeRecipe);
 
     }
-
-
-
     render() {
-
         const recipe = this.state.activeRecipe;
-        return <div className="container">
+        return (
+        
+        <div className="container">
             { this.state.activeRecipe.length !== 0 && 
 
                 <div className="active-recipe">
@@ -35,7 +33,7 @@ class Recipe extends React.Component {
                     </h4>
                     <p className="active-recipe__website">
                         Website:
-                <span>
+                        <span>
                             <a href={recipe.publisher_url}>
                                 {recipe.publisher_url}
                             </a>
@@ -47,7 +45,8 @@ class Recipe extends React.Component {
                 </div>
 
             }
-          </div>;
+          </div>
+        );
     }
 };
 
